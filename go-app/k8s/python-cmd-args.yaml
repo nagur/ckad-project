@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-args-pod
+spec:
+  containers:
+  - name: python-args-con
+    image: nsudhakar/webapp-color
+    command: ["python", "app.py"]
+    args: ["--color", "pink"]

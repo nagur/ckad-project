@@ -1,6 +1,10 @@
 package main
-import fmt
+
+import (
+	"fmt"
+)
+
 // this is my first go project
-func main(){
+func main() {
 	fmt.Println("Hello first project")
 }
