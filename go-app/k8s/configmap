@@ -1,0 +1,5 @@
+APP_COLOR: blue
+APP_MODE: prod
+# k create configmap app-config --from-literal=APP_COLOR=blue --from-literal=APP_MOD=prod
+# k create configmap app-config --from-file=<path to  file>
+# k create configmap app-config --from-file=app_config.properties
