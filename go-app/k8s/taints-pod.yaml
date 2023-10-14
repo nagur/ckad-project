@@ -1,0 +1,19 @@
+#https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "node"
+    operator: "Equal"
+    value: "ckad"
+    effect: "NoSchedule"
+# Taints - NoExecute
+#  Taints restrict a node to accept only the certain pods to schedule.. 

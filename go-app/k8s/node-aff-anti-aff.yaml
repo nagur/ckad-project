@@ -1,0 +1,19 @@
+#https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes-using-node-affinity/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:  #manadatory the label #  Other # preDuSchIgDuEx =ignore during schedule.
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: node
+            operator: In  # norIn,Exists
+            values:
+            - ckad            
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
