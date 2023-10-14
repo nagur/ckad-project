@@ -1,2 +1,6 @@
 https://www.endpointdev.com/blog/2022/01/kubernetes-101/
 https://github.com/JanaSabuj/music-api-k8s
+#https://github.com/docker/awesome-compose
+https://docs.docker.com/language/golang/build-images/
+https://github.com/matryer/goblueprints
+https://github.com/docker/awesome-compose

@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: go-web-app
+  namespace: ckad-2023
 spec:
   replicas: 5
   selector:
@@ -13,9 +14,16 @@ spec:
       labels:
         name: go-webapp
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: application
-        image: docker.io/nsudhakar/ckad-projets/go-web
+        image: nsudhakar/ckad-projets:go-web
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 3000
+      tolerations:
+      - key: "node"
+        operator: "Equal"
+        value: "ckad"
+        effect: "NoSchedule"     
