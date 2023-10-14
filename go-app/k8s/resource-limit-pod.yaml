@@ -1,0 +1,33 @@
+#https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+##verall resource requests and limits for a Pod. For a particular resource, 
+#a Pod resource request/limit is the sum of the resource requests/limits
+# of that type for each container in the Pod.###
+
+#############CPU##########################
+#1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core,
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+spec:
+  containers:
+  - name: app
+    image: images.my-company.example/app:v4
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m" #0.5cpu(1/2cpu)
+  - name: log-aggregator
+    image: images.my-company.example/log-aggregator:v6
+    resources:
+      requests:
+        memory: "64Mi" # Mibibyte =1024 , Megabyte=1000bytes, Gibibyte=1024
+        cpu: "250m"
+      limits:
+        memory: "128Mi"  # error: out of memory  -if memory reached the limits
+        cpu: "500m"    #  error: insufficent resouces 

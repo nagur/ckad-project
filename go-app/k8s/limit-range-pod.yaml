@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-conflict-with-limitrange-cpu
+spec:
+  containers:
+  - name: demo
+    image: registry.k8s.io/pause:2.0
+    resources:
+      requests:
+        cpu: 700m
+
+# if limitrange is set. then if the user is trying to spinup the pod wihtout the limits, it will check the limitrange on the namespace
+# and fails  #error: Pod "example-conflict-with-limitrange-cpu" is invalid: spec.containers[0].resources.requests: Invalid value: "700m": must be less than or equal to cpu limit
+#Ref: https://kubernetes.io/docs/concepts/policy/limit-range/
