@@ -1,0 +1,15 @@
+# cpu,mem,storag,- cluster level
+# pod level metrics - cpu,mem,store consumption
+# Opensources
+1. Metrics services (does not store logs on disks ) --ckad   
+# 2. prometheus
+# 3. Elastic stack
+# 4. DataDog
+# 5. Dynatrace
+
+# heapster - old name
+
+====================================
+kubectl(caadivsor)
+
+#bhttps://kubernetes.io/docs/concepts/cluster-administration/system-metrics/

@@ -1,0 +1,53 @@
+#sidecar
+#adapter - process the logs
+#ambassador
+
+#Some Pods have init containers as well as app containers.
+# By default, init containers run and complete before the app containers are started.
+# In multicontainer pod, each container is expected to run a process that stays alive as long as the pod
+# ..lifecycle. otherwise if any container fails the pod restarts.
+
+# Ref : https://discuss.kubernetes.io/t/what-happens-if-a-container-goes-down-in-a-multi-container-pod/15835
+# https://kubernetes.io/docs/concepts/cluster-administration/logging/
+# https://kubernetes.io/docs/concepts/workloads/pods/
+
+---
+# Sidecar example to generate logs and forward to logging agent.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+spec:
+  containers:
+  - name: count
+    image: busybox:1.28
+    args:
+    - /bin/sh
+    - -c
+    - >
+      i=0;
+      while true;
+      do
+        echo "$i: $(date)" >> /var/log/1.log;
+        echo "$(date) INFO $i" >> /var/log/2.log;
+        i=$((i+1));
+        sleep 1;
+      done      
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  - name: count-log-1
+    image: busybox:1.28
+    args: [/bin/sh, -c, 'tail -n+1 -F /var/log/1.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  - name: count-log-2
+    image: busybox:1.28
+    args: [/bin/sh, -c, 'tail -n+1 -F /var/log/2.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  volumes:
+  - name: varlog
+    emptyDir: {}

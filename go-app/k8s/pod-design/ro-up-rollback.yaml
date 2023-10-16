@@ -1,0 +1,8 @@
+k get rs   -- to see the rolling updates
+k rollout undo deployment test-deploy  # rollback to previousk set image deployment test-deploy nginx=nginx:1.9.1
+k rollout status test-deploy # to see the 
+k rollout history 
+k rollout history deploy test-deploy --revision=1 # to see the revision status 
+k set image deploy nginx nginx=ngix: 1.17:1 --record # 
+k roolout undo deply nginx --to-revision=1  # to rollback to specified version. 
+

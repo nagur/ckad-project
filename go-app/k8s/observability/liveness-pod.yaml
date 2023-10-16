@@ -1,0 +1,20 @@
+#https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+#https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+#https://github.com/kubernetes/kubernetes/blob/master/test/images/agnhost/liveness/server.go
+apiVersion: v1
+kind: Pod
+metadata:
+  name: goproxy
+  labels:
+    app: goproxy
+spec:
+  containers:
+  - name: goproxy
+    image: registry.k8s.io/goproxy:0.1
+    ports:
+    - containerPort: 8080
+    livenessProbe:   # Many applications running for long periods of time eventually transition to broken states, and cannot recover except by being restarted. Kubernetes provides liveness probes to detect and remedy such situations.
+      tcpSocket:
+        port: 8080  
+      initialDelaySeconds: 15
+      periodSeconds: 10
