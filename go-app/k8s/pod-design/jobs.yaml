@@ -1,2 +1,5 @@
 # types of workloads
 # perform a certain task and finish.
+A container always restarts if it exits.. since k8s by default keep the restartPolicy=Always for a Pod.
+==> We can set explictily: restartPolic: Never
+=======================================================================
